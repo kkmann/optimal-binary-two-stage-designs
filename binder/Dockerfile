@@ -1,10 +1,11 @@
 FROM rocker/verse:3.6.2
 
 # install the notebook package
-RUN wget https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-RUN python get-pip.py --user
-RUN pip install --no-cache --upgrade pip && \
-pip install --no-cache notebook
+RUN apt update
+RUN apt-get -y install python3-pip
+RUN python3 -m pip install -Iv jupyter==1.0.0
+RUN python3 -m pip install -Iv nbconvert==5.6.1
+RUN python3 -m pip install -Iv snakemake==5.9.1
 
 # create user with a home directory
 ARG NB_USER
