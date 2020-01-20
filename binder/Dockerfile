@@ -1,7 +1,7 @@
 FROM rocker/verse:3.6.2
 
 # install the notebook package
-RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+RUN wget https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 RUN python3 get-pip.py --user
 RUN pip install --no-cache --upgrade pip && \
 pip install --no-cache notebook
