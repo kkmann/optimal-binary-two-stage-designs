@@ -5,4 +5,8 @@ tar -xvzf julia.tar.gz
 
 julia-1.3.1/bin/julia -e 'import Pkg; Pkg.add(Pkg.PackageSpec(;name="IJulia", version="1.20.2")); Pkg.build("IJulia")'
 
+julia-1.3.1/bin/julia -e 'import Pkg; Pkg.add(Pkg.PackageSpec(url="https://github.com/kkmann/bad.jl")); using bad'
+
 R -e 'JuliaCall::julia_setup(JULIA_HOME = "/home/jovyan/julia-1.3.1/bin")'
+
+
