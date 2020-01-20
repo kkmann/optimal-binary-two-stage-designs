@@ -1,0 +1,5 @@
+[deps]
+bad = "8ff1ff99-2a79-4078-a1fc-e0ee2b6d8ac3"
+
+[compat]
+julia = "1.3.1"
