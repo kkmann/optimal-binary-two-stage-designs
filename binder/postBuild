@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -ex
-
-R -e 'library(badr); badr::setup_julia_package()'
