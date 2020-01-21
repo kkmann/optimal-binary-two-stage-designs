@@ -3,6 +3,18 @@ From: rocker/verse:3.6.2
 
 
 
+%help
+    This singularity container packs all dependendencies to execute or to view interactively
+    the scripts and notebooks required to reproduce the contents of my thesis.
+    
+    The runscript ' exec snakemake "$@"` ' forwards all user arguments to the installed version
+    of snakemake.
+    
+    Quickstart (call in root folder containing the snakefile):
+        singularity run [containername] -j 6 all
+
+
+
 %environment
     JULIA_PROJECT="/opt/.julia"
     export JULIA_PROJECT
@@ -75,3 +87,8 @@ From: rocker/verse:3.6.2
     # install R wrapper package for 'bad'
     R -e "remotes::install_github('kkmann/badr', upgrade_dependencies = FALSE)"
     R -e "JuliaCall::julia_setup(install=FALSE,useRCall=FALSE)"
+
+
+
+%runscript
+    exec snakemake "$@"`

@@ -1,23 +1,15 @@
-import os
-os.makedirs('output/figures', exist_ok = True)
-os.makedirs('output/tables', exist_ok = True)
-
-
-
-
-
 rule introduction:
     input:
         "notebooks/introduction.ipynb"
     output:
-        "output/figures/introduction-binomial-power.pdf",
-        "output/figures/introduction-binomial-vs-simons.pdf",
-        "output/figures/introduction-sample-size-recalculation.pdf",
-        "output/figures/introduction-sample-size-recalculation-conditional-power.pdf"
+        "latex/figures/introduction-binomial-power.pdf",
+        "latex/figures/introduction-binomial-vs-simons.pdf",
+        "latex/figures/introduction-sample-size-recalculation.pdf",
+        "latex/figures/introduction-sample-size-recalculation-conditional-power.pdf"
     shell:
         """
-        jupyter nbconvert --execute notebooks/introduction.ipynb
-        mv notebooks/*.pdf output/figures
+        jupyter nbconvert --ExecutePreprocessor.timeout=3600 --execute notebooks/introduction.ipynb
+        mv notebooks/*.pdf latex/figures
         rm notebooks/introduction.html
         """
 
@@ -27,13 +19,13 @@ rule optimal_two_stage_designs:
     input:
         "notebooks/optimal-two-stage-designs.ipynb"
     output:
-        "output/figures/optimal-two-stage-designs-simon-vs-optimal.pdf",
-        "output/figures/optimal-two-stage-designs-null-vs-alternative-vs-minimax.pdf"
+        "latex/figures/optimal-two-stage-designs-simon-vs-optimal.pdf",
+        "latex/figures/optimal-two-stage-designs-null-vs-alternative-vs-minimax.pdf"
     shell:
         """
-        jupyter nbconvert --execute notebooks/optimal-two-stage-designs.ipynb
-        mv notebooks/*.pdf output/figures
-        rm notebooks/introduction.html
+        jupyter nbconvert --ExecutePreprocessor.timeout=3600 --execute notebooks/optimal-two-stage-designs.ipynb
+        mv notebooks/*.pdf latex/figures
+        rm notebooks/optimal-two-stage-designs.html
         """
         
  
@@ -42,14 +34,14 @@ rule optimisation_under_uncertainty:
     input:
         "notebooks/optimisation-under-uncertainty.ipynb"
     output:
-        "output/figures/optimisation-under-uncertainty-prior-choice-designs.pdf",
-        "output/figures/optimisation-under-uncertainty-power-constraints.pdf.pdf",
-        "output/figures/optimisation-under-uncertainty-power-vs-prior-parameters.pdf"
+        "latex/figures/optimisation-under-uncertainty-prior-choice-designs.pdf",
+        "latex/figures/optimisation-under-uncertainty-power-constraints.pdf",
+        "latex/figures/optimisation-under-uncertainty-power-vs-prior-parameters.pdf"
     shell:
         """
-        jupyter nbconvert --execute notebooks/notebooks/optimisation-under-uncertainty.ipynb
-        mv notebooks/*.pdf output/figures
-        rm notebooks/notebooks/optimisation-under-uncertainty.html
+        jupyter nbconvert --ExecutePreprocessor.timeout=3600 --execute notebooks/optimisation-under-uncertainty.ipynb
+        mv notebooks/*.pdf latex/figures
+        rm notebooks/optimisation-under-uncertainty.html
         """
 
 
@@ -58,12 +50,12 @@ rule bayesian_inference:
     input:
         "notebooks/bayesian-inference.ipynb"
     output:
-        "output/figures/bayesian-inference-posteior-mean-bias-rmse.pdf"
+        "latex/figures/bayesian-inference-posteior-mean-bias-rmse.pdf"
     shell:
         """
-        jupyter nbconvert --execute notebooks/notebooks/bayesian-inference.ipynb
-        mv notebooks/*.pdf output/figures
-        rm notebooks/notebooks/bayesian-inference.html
+        jupyter nbconvert --ExecutePreprocessor.timeout=3600 --execute notebooks/bayesian-inference.ipynb
+        mv notebooks/*.pdf latex/figures
+        rm notebooks/bayesian-inference.html
         """
 
 
@@ -72,13 +64,13 @@ rule frequentist_inference:
     input:
         "notebooks/frequentist-inference.ipynb"
     output:
-        "output/figures/frequentist-inference-bias-rmse-performance.pdf",
-        "output/figures/frequentist-inference-pvalue-distributions.pdf"
+        "latex/figures/frequentist-inference-bias-rmse-performance.pdf",
+        "latex/figures/frequentist-inference-pvalue-distributions.pdf"
     shell:
         """
-        jupyter nbconvert --execute notebooks/notebooks/frequentist-inference.ipynb
-        mv notebooks/*.pdf output/figures
-        rm notebooks/notebooks/frequentist-inference.html
+        jupyter nbconvert --ExecutePreprocessor.timeout=3600 --execute notebooks/frequentist-inference.ipynb
+        mv notebooks/*.pdf latex/figures
+        rm notebooks/frequentist-inference.html
         """
 
 
@@ -87,13 +79,13 @@ rule unplanned_adaptations:
     input:
         "notebooks/unplanned-adaptations.ipynb"
     output:
-        "output/figures/unplanned-adaptations-base-design.pdf",
-        "output/figures/unplanned-adaptations-adapted-sample-size-function-comparison.pdf"
+        "latex/figures/unplanned-adaptations-base-design.pdf",
+        "latex/figures/unplanned-adaptations-adapted-sample-size-function-comparison.pdf"
     shell:
         """
-        jupyter nbconvert --execute notebooks/notebooks/unplanned-adaptations.ipynb
-        mv notebooks/*.pdf output/figures
-        rm notebooks/notebooks/unplanned-adaptations.html
+        jupyter nbconvert --ExecutePreprocessor.timeout=3600 --execute notebooks/unplanned-adaptations.ipynb
+        mv notebooks/*.pdf latex/figures
+        rm notebooks/unplanned-adaptations.html
         """
 
 
