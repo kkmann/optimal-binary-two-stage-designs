@@ -1,6 +1,8 @@
-.DS_Store
+*.DS_Store
 
 output
 .snakemake
+*.ipynb_checkpoints
 
 *.pdf
+*.html

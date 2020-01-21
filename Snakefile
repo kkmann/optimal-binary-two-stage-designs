@@ -1,5 +1,3 @@
-configfile: "config/snakemake.yml"
-
 import os
 os.makedirs('output/figures', exist_ok = True)
 os.makedirs('output/tables', exist_ok = True)
@@ -10,144 +8,102 @@ os.makedirs('output/tables', exist_ok = True)
 
 rule introduction:
     input:
-        binomial_power    = "chapters/introduction/binomial-power-plot.R",
-        binomial_vs_simon = "chapters/introduction/binomial-vs-simon-plot.R",
-        recalculation     = "chapters/introduction/adaptive-recalculation.R"
+        "notebooks/introduction.ipynb"
     output:
-        binomial_power    = "output/figures/binomial-power-plot.pdf",
-        binomial_vs_simon = "output/figures/binomial-vs-simon-plot.pdf",
-        recalculation_1   = "output/figures/adaptive-recalculation-designs.pdf",
-        recalculation_2   = "output/figures/adaptive-recalculation-conditional-power.pdf"
+        "output/figures/introduction-binomial-power.pdf",
+        "output/figures/introduction-binomial-vs-simons.pdf",
+        "output/figures/introduction-sample-size-recalculation.pdf",
+        "output/figures/introduction-sample-size-recalculation-conditional-power.pdf"
     shell:
         """
-        Rscript {input.binomial_power} {output.binomial_power} 7 4
-        Rscript {input.binomial_vs_simon} {output.binomial_vs_simon} 7 7
-        Rscript {input.recalculation} "output/figures/adaptive-recalculation" 7 7
+        jupyter nbconvert --execute notebooks/introduction.ipynb
+        mv notebooks/*.pdf output/figures
+        rm notebooks/introduction.html
         """
 
 
 
-
-
-rule optimal_designs:
+rule optimal_two_stage_designs:
     input:
-        simon_vs_optimal = "chapters/optimal-two-stage-designs/simon-vs-optimal.R",
-        optimal_p0_p1_minimax = "chapters/optimal-two-stage-designs/optimal-null-alternative-minimax.R"
+        "notebooks/optimal-two-stage-designs.ipynb"
     output:
-        simon_vs_optimal = "output/figures/simon-vs-optimal.pdf",
-        optimal_p0_p1_minimax = "output/figures/optimal-null-alternative-minimax.pdf"
+        "output/figures/optimal-two-stage-designs-simon-vs-optimal.pdf",
+        "output/figures/optimal-two-stage-designs-null-vs-alternative-vs-minimax.pdf"
     shell:
         """
-        Rscript {input.simon_vs_optimal} {output.simon_vs_optimal} 7 7
-        Rscript {input.optimal_p0_p1_minimax} {output.optimal_p0_p1_minimax} 7 7
+        jupyter nbconvert --execute notebooks/optimal-two-stage-designs.ipynb
+        mv notebooks/*.pdf output/figures
+        rm notebooks/introduction.html
         """
+        
+ 
 
-rule solution_time:
+rule optimisation_under_uncertainty:
     input:
-        solution_time = "chapters/optimal-two-stage-designs/solution-time.R"
+        "notebooks/optimisation-under-uncertainty.ipynb"
     output:
-        solution_time = "output/figures/solution-time-plot.pdf"
+        "output/figures/optimisation-under-uncertainty-prior-choice-designs.pdf",
+        "output/figures/optimisation-under-uncertainty-power-constraints.pdf.pdf",
+        "output/figures/optimisation-under-uncertainty-power-vs-prior-parameters.pdf"
     shell:
         """
-        Rscript {input.solution_time} {output.solution_time} 7 3
+        jupyter nbconvert --execute notebooks/notebooks/optimisation-under-uncertainty.ipynb
+        mv notebooks/*.pdf output/figures
+        rm notebooks/notebooks/optimisation-under-uncertainty.html
         """
 
 
 
-
-
-rule prior_choices:
+rule bayesian_inference:
     input:
-        prior_effect = "chapters/prior-choice/prior-effect-on-designs.R"
+        "notebooks/bayesian-inference.ipynb"
     output:
-        designs = "output/figures/prior-effect-on-designs.pdf",
-        priors  = "output/figures/prior-effect-on-designs-priors.pdf"
+        "output/figures/bayesian-inference-posteior-mean-bias-rmse.pdf"
     shell:
         """
-        Rscript {input.prior_effect} "output/figures/prior-effect-on-designs" 7 7
+        jupyter nbconvert --execute notebooks/notebooks/bayesian-inference.ipynb
+        mv notebooks/*.pdf output/figures
+        rm notebooks/notebooks/bayesian-inference.html
         """
 
-rule power_constraints:
+
+
+rule frequentist_inference:
     input:
-        power_constraints = "chapters/prior-choice/power-constraints.R"
+        "notebooks/frequentist-inference.ipynb"
     output:
-        "output/figures/power-constraints.pdf",
-        "output/figures/power-constraints-distribution.pdf",
-        "output/figures/power-constraints-power-vs-prior.pdf"
+        "output/figures/frequentist-inference-bias-rmse-performance.pdf",
+        "output/figures/frequentist-inference-pvalue-distributions.pdf"
     shell:
         """
-        Rscript {input.power_constraints} "output/figures/power-constraints" 7 7
+        jupyter nbconvert --execute notebooks/notebooks/frequentist-inference.ipynb
+        mv notebooks/*.pdf output/figures
+        rm notebooks/notebooks/frequentist-inference.html
         """
 
-rule expected_power:
+
+
+rule unplanned_adaptations:
     input:
-        expected_power = "chapters/prior-choice/expected-power.R"
+        "notebooks/unplanned-adaptations.ipynb"
     output:
-        expected_power = "output/figures/expected-power.pdf"
+        "output/figures/unplanned-adaptations-base-design.pdf",
+        "output/figures/unplanned-adaptations-adapted-sample-size-function-comparison.pdf"
     shell:
         """
-        Rscript {input.expected_power} {output.expected_power} 7 7
-        """
-
-rule expected_utility:
-    input:
-        expected_utility = "chapters/prior-choice/expected-utility.R"
-    output:
-        "output/figures/expected-utility-optimisation.pdf",
-        "output/figures/expected-utility-matched-design.pdf",
-        "output/figures/expected-utility-alternative-scenarios.pdf"
-    shell:
-        """
-        Rscript {input.expected_utility} "output/figures/expected-utility" 7 7
+        jupyter nbconvert --execute notebooks/notebooks/unplanned-adaptations.ipynb
+        mv notebooks/*.pdf output/figures
+        rm notebooks/notebooks/unplanned-adaptations.html
         """
 
 
 
-
-
-rule posterior_mean:
-    input:
-        posterior_mean = "chapters/bayesian-inference/posterior-mean-comparison.R"
-    output:
-        "output/figures/posterior-mean-comparison.pdf",
-        "output/figures/posterior-mean-comparison-jeffreys-by-design.pdf"
-    shell:
-        """
-        Rscript {input.posterior_mean} "output/figures/posterior-mean-comparison" 7 8
-        """
-
-rule rbe_mle:
-    input:
-        rbe_mle = "chapters/frequentist-inference/rbe-mle.R"
-    output:
-        "output/figures/rbe-mle-bias-rmse.pdf",
-        "output/figures/rbe-mle-pvalues.pdf",
-        "output/figures/rbe-mle-intervals.pdf"
-    shell:
-        """
-        Rscript {input.rbe_mle} "output/figures/rbe-mle" 7 8
-        """
-
-rule shan_design:
-    input:
-        shan_design = "chapters/frequentist-inference/shan-design.R"
-    output:
-        "output/figures/shan-design-performance.pdf",
-        "output/figures/shan-design-compatibility.pdf",
-        "output/figures/shan-design-mle-cmle-diff.pdf"
-    shell:
-        """
-        Rscript {input.shan_design} "output/figures/shan-design" 7 8
-        """
-
-
-rule unplanned_adaptation:
-    input:
-        script = "chapters/unplanned-adaptation/scenario-1.R"
-    output:
-        "output/figures/unplanned-adaptation-base-design.pdf",
-        "output/figures/unplanned-adaptation-modified-design-1.pdf"
-    shell:
-        """
-        Rscript {input.script} "output/figures/unplanned-adaptation" 7 7
-        """
+rule all:
+    input: 
+        rules.introduction.output, 
+        rules.optimal_two_stage_designs.output, 
+        rules.optimisation_under_uncertainty.output,
+        rules.bayesian_inference.output, 
+        rules.frequentist_inference.output, 
+        rules.unplanned_adaptations.output
+       
