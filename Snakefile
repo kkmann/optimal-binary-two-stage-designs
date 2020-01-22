@@ -19,7 +19,7 @@ rule optimal_two_stage_designs:
     input:
         "notebooks/optimal-two-stage-designs.ipynb"
     output:
-        "latex/figures/optimal-two-stage-designs-simon-vs-optimal.pdf",
+        "latex/figures/optimal-two-stage-designs-simons-vs-optimal.pdf",
         "latex/figures/optimal-two-stage-designs-null-vs-alternative-vs-minimax.pdf"
     shell:
         """
@@ -36,6 +36,7 @@ rule optimisation_under_uncertainty:
     output:
         "latex/figures/optimisation-under-uncertainty-prior-choice-designs.pdf",
         "latex/figures/optimisation-under-uncertainty-power-constraints.pdf",
+        "latex/figures/optimisation-under-uncertainty-sensitivity-expected-power.pdf",
         "latex/figures/optimisation-under-uncertainty-power-vs-prior-parameters.pdf"
     shell:
         """
@@ -50,7 +51,8 @@ rule bayesian_inference:
     input:
         "notebooks/bayesian-inference.ipynb"
     output:
-        "latex/figures/bayesian-inference-posteior-mean-bias-rmse.pdf"
+        "latex/figures/bayesian-inference-posterior-mean-bias-rmse.pdf",
+        "latex/figures/bayesian-inference-jeffreys-prior.pdf"
     shell:
         """
         jupyter nbconvert --ExecutePreprocessor.timeout=3600 --execute notebooks/bayesian-inference.ipynb
@@ -87,6 +89,20 @@ rule unplanned_adaptations:
         mv notebooks/*.pdf latex/figures
         rm notebooks/unplanned-adaptations.html
         """
+        
+        
+
+rule continuous_case:
+    input:
+        "notebooks/continuous-case.ipynb"
+    output:
+        "latex/figures/continuous-case-design.pdf"
+    shell:
+        """
+        jupyter nbconvert --ExecutePreprocessor.timeout=3600 --execute notebooks/continuous-case.ipynb
+        mv notebooks/*.pdf latex/figures
+        rm notebooks/continuous-case.html
+        """
 
 
 
@@ -97,5 +113,6 @@ rule all:
         rules.optimisation_under_uncertainty.output,
         rules.bayesian_inference.output, 
         rules.frequentist_inference.output, 
-        rules.unplanned_adaptations.output
+        rules.unplanned_adaptations.output,
+        rules.continuous_case.output
        
