@@ -3,6 +3,7 @@
 output
 .snakemake
 *.ipynb_checkpoints
+*.home
 
 *.pdf
 *.html
