@@ -1,7 +1,8 @@
 ui <- navbarPage("",
 
     tabPanel("Background",
-        h1("bla")
+        h1("bla"),
+        textOutput("tmp")
     ),
 
     tabPanel("Expected Power",

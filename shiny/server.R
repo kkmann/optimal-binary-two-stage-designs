@@ -1,7 +1,10 @@
 library(shiny)
-library(badr)
-badr::load_julia_package()
 
+tmp <- capture.output({
+    library(badr)
+    badr::load_julia_package()
+},
+type = "message")
 
 
 server <- function(input, output) {
@@ -9,6 +12,8 @@ server <- function(input, output) {
     prior <- reactive({
         (input$epsilon * badr::Beta(1, 1) + (1 - input$epsilon) * badr::Beta(input$a, input$b)) <= input$pmp
     })
+
+    output$tmp <- renderText(tmp)
 
     output$plt_prior <- renderPlot({
         p <- seq(0, 1, .001)
