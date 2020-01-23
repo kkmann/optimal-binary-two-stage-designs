@@ -13,6 +13,19 @@ courtesy to https://mybinder.org by following the [binder-link](https://mybinder
 
 Since the instances are running on a free service, availibility and computing speed may vary.
 
+All links on this page point to the respective newest variant of the repository (master), to run an older version,
+simply modify the binder link, e.g., 
+
+```
+https://mybinder.org/v2/gh/kkmann/optimal-binary-two-stage-designs/master?urlpath=lab/tree/notebooks/introduction.ipynb
+```
+
+to 
+
+```
+https://mybinder.org/v2/gh/kkmann/optimal-binary-two-stage-designs/0.1.0?urlpath=lab/tree/notebooks/introduction.ipynb
+```
+
 
 
 ## Shiny app [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kkmann/optimal-binary-two-stage-designs/master?urlpath=shiny%2Fshiny%2F)
