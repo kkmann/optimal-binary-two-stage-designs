@@ -3,3 +3,8 @@
 
 
 # Optimal binary two-stage designs
+
+
+## Shiny app
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kkmann/optimal-binary-two-stage-designs/master?urlpath=shiny%2Fshiny%2F)
