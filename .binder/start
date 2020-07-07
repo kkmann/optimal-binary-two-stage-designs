@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -ex
+
+export JULIA_HOME="$(pwd)/julia-1.4.2/bin"
+
+exec "$@"

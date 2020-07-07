@@ -8,3 +8,5 @@ output
 *.pdf
 *.html
 *.sif
+
+.local

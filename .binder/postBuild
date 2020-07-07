@@ -1,0 +1,14 @@
+set -ex
+
+# download julia
+wget -O julia.tar.gz https://julialang-s3.julialang.org/bin/linux/x64/1.4/julia-1.4.2-linux-x86_64.tar.gz
+# unpack
+tar -xvzf julia.tar.gz
+rm julia.tar.gz
+
+# instantiate and precompile package dependencies
+julia-1.4.2/bin/julia -e 'import Pkg; Pkg.activate("."); Pkg.instantiate(); Pkg.precompile()'
+
+# connect julia to r
+export JULIA_HOME="$(pwd)/julia-1.4.2/bin"
+R -e 'JuliaCall::julia_setup(); badr::load_julia_package()'
