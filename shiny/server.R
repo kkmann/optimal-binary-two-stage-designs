@@ -1,5 +1,9 @@
 library(shiny)
 library(badr)
+
+if (dir.exists("/home/jovyan/julia-1.4.2/bin")) {
+    options(JULIA_HOME = "/home/jovyan/julia-1.4.2/bin")
+}
 badr::load_julia_package()
 
 
