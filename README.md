@@ -40,11 +40,8 @@ Depending on the user inputs, optimisation might thus take up to a few minutes.
 
 ## Reproduce the results locally
 
-To reproduce the results locally, you will need a Linux command line (tested on Ubuntu 18.04 and 19.10) and the
-container software [singularity](https://sylabs.io/guides/3.5/user-guide/quick_start.html#quick-installation-steps).
-Note that singularity currently can only be installed manually.
-Version 3.5 was used to generate the container image and the singularity version must be compatible with 3.5.
-
-The container contains all required packages ([bad](https://github.com/kkmann/bad.jl), [badr](https://github.com/kkmann/badr), and [adoptr](https://github.com/kkmann/adoptr)) as well as the workflow managment software [snakemake](https://snakemake.readthedocs.io/en/stable/) and a working installation of [jupyter](https://jupyter.org/).
-
-[...]
+1. install [git](https://git-scm.com/), [docker](https://www.docker.com/), [python](https://www.python.org/), and [repo2docker](https://www.python.org/)
+2. execute `git clone https://github.com/kkmann/optimal-binary-two-stage-designs` to download the repository
+3. switch to the repository folder via `cd optimal-binary-two-stage-designs`
+4. [optionally] checkout a specific version tag using e.g. `git checkout 0.1.0`
+5. run `jupyter-repo2docker -E .` to build and start the container locally, this will start a Jupyter notebook server in you browser and you can navigate to the respective notebook in the `notebooks/` subfolder.

@@ -1,7 +1,7 @@
 ui <- navbarPage("",
 
     tabPanel("Background",
-        h1("bla")
+        includeMarkdown("background.md")
     ),
 
     tabPanel("Expected Power",
@@ -53,7 +53,7 @@ ui <- navbarPage("",
             ),
 
             mainPanel(
-                plotOutput("plt_prior"),
+                plotOutput("plt_prior", height = "200px"),
                 plotOutput("plt_ep_design")
             )
         )

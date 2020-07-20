@@ -15,7 +15,18 @@ server <- function(input, output) {
 
     output$plt_prior <- renderPlot({
         p <- seq(0, 1, .001)
-        plot(p, density(prior(), p))
+        tibble::tibble(
+                      p = p,
+            `prior PDF` = density(prior(), p),
+                section = dplyr::if_else(p <= input$pmp, 1, 0)
+        ) %>%
+        ggplot2::ggplot() +
+            ggplot2::aes(p, `prior PDF`, group = section) +
+            ggplot2::geom_line() +
+            ggplot2::theme_bw() +
+            ggplot2::theme(
+                panel.grid.minor = ggplot2::element_blank()
+            )
     })
 
     design_ep <- reactive({withProgress(message = 'optimising expected power...', value = 1, {
