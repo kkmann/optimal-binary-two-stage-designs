@@ -1,6 +1,7 @@
 library(shiny)
 library(badr)
 
+# for some reason the 'start' script is not working for the shiny runtime
 if (dir.exists("/home/jovyan/julia-1.4.2/bin")) {
     options(JULIA_HOME = "/home/jovyan/julia-1.4.2/bin")
 }
@@ -35,8 +36,8 @@ server <- function(input, output) {
         isolate(
             Problem(
                 minimise(SampleSize(prior())),
-                Power(prior() %|% input$p0mrv[1]) <= .05,
-                Power(prior() >=  input$p0mrv[2]) >= 1 - .2,
+                Power(prior() %|% input$p0mrv[1]) <= input$errorrates[1],
+                Power(prior() >=  input$p0mrv[2]) >= input$errorrates[2],
                 unimodal = input$unimodal,
                 label = 'EP design'
             ) %>%
@@ -53,8 +54,8 @@ server <- function(input, output) {
         isolate(
             Problem(
                 minimise_maximal_sample_size(.2, PointMass(input$p01_minimax[2])),
-                Power(prior() %|% input$p01_minimax[1]) <= .05,
-                Power(prior() %|% input$p01_minimax[2]) >= 1 - .2,
+                Power(prior() %|% input$p01_minimax[1]) <= input$errorrates_minimax[1],
+                Power(prior() %|% input$p01_minimax[2]) >= input$errorrates_minimax[2],
                 unimodal = input$unimodal,
                 label = 'minimax design',
                 maxmultipleonestage = 1.0

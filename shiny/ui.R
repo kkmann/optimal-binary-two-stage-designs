@@ -47,6 +47,15 @@ ui <- navbarPage("",
                                           value = .7, step = .1)
                     )
                 ),
+                h4("Error rates"),
+                p("specify the maximal type one error rate and minimal expected power."),
+                fluidRow(
+                    sliderInput("errorrates",
+                          withMathJax("$$\\alpha \\text{ and } 1 - \\beta$$"),
+                          min = .025, max = .95, step = .025,
+                          value = c(.05, .8)
+                    ),
+                ),
                 h4("Unimodal sample size function?"),
                 p("check this box to force the solution to have a unimodal sample size function; note: this increases the runtime."),
                 checkboxInput("unimodal", "force unimodal?", value = FALSE)
@@ -71,6 +80,15 @@ ui <- navbarPage("",
                                  min = .1, max = .9, step = .05,
                                  value = c(.2, .4)
 
+                     ),
+                     h4("Error rates"),
+                     p("specify the maximal type one error rate and minimal expected power."),
+                     fluidRow(
+                         sliderInput("errorrates_minimax",
+                                     withMathJax("$$\\alpha \\text{ and } 1 - \\beta$$"),
+                                     min = .025, max = .95, step = .025,
+                                     value = c(.05, .8)
+                         ),
                      ),
                      h4("Unimodal sample size function?"),
                      p("check this box to force the solution to have a unimodal sample size function; note: this increases the runtime."),
